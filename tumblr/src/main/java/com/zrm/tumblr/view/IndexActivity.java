@@ -1,15 +1,22 @@
 package com.zrm.tumblr.view;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.zrm.tumblr.R;
+import com.zrm.tumblr.net.DataAcquire;
+import com.zrm.tumblr.utils.Logger;
 
-public class IndexActivity extends ActionBarActivity {
+import org.apache.http.Header;
+import org.json.JSONObject;
 
+public class IndexActivity extends Activity {
+
+    public static final String TAG = IndexActivity.class.getSimpleName();
     private ListView indexListView;
 
     @Override
@@ -18,6 +25,37 @@ public class IndexActivity extends ActionBarActivity {
         setContentView(R.layout.activity_index);
         findViewById();
 
+        requestData();
+    }
+
+    private void requestData() {
+        DataAcquire.getPhotoList(new JsonHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                Logger.i(TAG,response.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                super.onRetry(retryNo);
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+            }
+        });
     }
 
     private void findViewById(){
