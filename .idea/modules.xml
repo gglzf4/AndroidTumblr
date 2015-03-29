@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidTumblr.iml" filepath="$PROJECT_DIR$/AndroidTumblr.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tumblr/tumblr.iml" filepath="$PROJECT_DIR$/tumblr/tumblr.iml" />
     </modules>
   </component>

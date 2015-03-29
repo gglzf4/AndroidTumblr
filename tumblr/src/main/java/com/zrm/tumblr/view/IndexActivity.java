@@ -22,6 +22,7 @@ public class IndexActivity extends ActionBarActivity {
 
     private void findViewById(){
         indexListView = (ListView) findViewById(R.id.index_listview);
+
     }
 
 

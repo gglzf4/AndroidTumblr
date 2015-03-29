@@ -1,1 +1,2 @@
-include ':app', ':tumblr'
+/*include ':app', ':tumblr'*/
+include ':tumblr'
