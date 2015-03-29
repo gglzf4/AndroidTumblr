@@ -8,25 +8,38 @@ import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.zrm.tumblr.R;
+import com.zrm.tumblr.adapter.IndexListViewAdapter;
+import com.zrm.tumblr.model.Photo;
 import com.zrm.tumblr.net.DataAcquire;
-import com.zrm.tumblr.utils.Logger;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class IndexActivity extends Activity {
 
     public static final String TAG = IndexActivity.class.getSimpleName();
     private ListView indexListView;
+    private IndexListViewAdapter listViewAdapter;
+    private List<Photo> photos = new ArrayList<Photo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+
+
         findViewById();
+
+
 
         requestData();
     }
+
+
 
     private void requestData() {
         DataAcquire.getPhotoList(new JsonHttpResponseHandler() {
@@ -38,7 +51,20 @@ public class IndexActivity extends Activity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Logger.i(TAG,response.toString());
+                int status = response.optInt("status");
+                if(status == 200){
+                    JSONArray array = response.optJSONArray("content");
+                    if(array != null && array.length() >0){
+                        List<Photo> list = new ArrayList<Photo>();
+                        for(int i=0;i<array.length();i++){
+                            JSONObject photo = array.optJSONObject(i);
+                            String name = photo.optString("name");
+                            String url = photo.optString("url");
+                            list.add(new Photo(url,name));
+                        }
+                        listViewAdapter.notifyDataSetChanged(list);
+                    }
+                }
             }
 
             @Override
@@ -59,7 +85,10 @@ public class IndexActivity extends Activity {
     }
 
     private void findViewById(){
+        listViewAdapter = new IndexListViewAdapter(this,photos);
+
         indexListView = (ListView) findViewById(R.id.index_listview);
+        indexListView.setAdapter(listViewAdapter);
 
     }
 

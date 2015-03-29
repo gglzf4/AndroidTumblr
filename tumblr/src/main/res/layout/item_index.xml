@@ -2,17 +2,24 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
-        android:minHeight="150dp"
+        android:layout_height="200dp"
+        android:minHeight="200dp"
         android:background="#112233">
     <ImageView
         android:id="@+id/index_item_imageview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:src="@drawable/default_pic"
         android:scaleType="fitXY"
         />
 
+    <CheckBox
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:button="@drawable/trip_radio_button"
+        />
 
 
 

@@ -3,6 +3,7 @@ package com.zrm.tumblr.utils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.zrm.tumblr.app.AppEnv;
 import com.zrm.tumblr.app.AppInfo;
 import com.zrm.tumblr.net.DataAcquire;
 
@@ -17,14 +18,11 @@ import java.util.Map;
  * Created by leitang on 8/23/13.
  */
 public class RestClient {
-    private final static String TAG = "RestClient" ;
-
-
+    private final static String TAG = RestClient.class.getSimpleName();
 
     public final static String httpMethod = "POST";
-    public static String firstOpen = "false";
 
-    public static String BASE_URL = AppUtils.APP_ENV.BASE_URL;//final
+    public static String BASE_URL = AppEnv.APP_ENV.BASE_URL;
 
 
 

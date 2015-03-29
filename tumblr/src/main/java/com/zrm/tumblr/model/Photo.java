@@ -8,6 +8,20 @@ public class Photo{
     private String name;
     private String url;
 
+    public Photo() {
+    }
+
+    public Photo(String url, String name) {
+        this.url = url;
+        this.name = name;
+    }
+
+    public Photo(long id, String name, String url) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+    }
+
     public long getId() {
         return id;
     }

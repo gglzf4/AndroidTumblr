@@ -6,8 +6,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
-import com.zrm.tumblr.app.AppEnv;
-
 import java.io.File;
 
 /**
@@ -15,19 +13,9 @@ import java.io.File;
  */
 public class AppUtils {
 
-    private final static String TAG = "AppUtils";
-
-    public final static String ANDROID_SEC = "2678werds3428erk";
-    public final static String ANDROID_KEY = "zzzzzzzzzzzzzzzzz";
+    private final static String TAG = AppUtils.class.getSimpleName();
 
 
-    //录音文件
-    public final static String SUFFIX_MP3 = ".mp3";
-    public final static String SUFFIX_APK = ".apk";
-    //
-    public static final String APP_NAME = "dfb365";
-    //welcome init
-    public static AppEnv.Env APP_ENV = AppEnv.Env.REA;
 
     private static File appFile = null;
 
@@ -48,9 +36,9 @@ public class AppUtils {
                 for (File file : files) {
                     if (file != null) {
                         String fileName = file.getName().toLowerCase();
-                        if (fileName.endsWith(SUFFIX_MP3) || fileName.endsWith(SUFFIX_APK)) {
+                        /*if (fileName.endsWith(SUFFIX_MP3) || fileName.endsWith(SUFFIX_APK)) {
                             file.delete();
-                        }
+                        }*/
                     }
                 }
             }
@@ -61,11 +49,11 @@ public class AppUtils {
         if (appFile == null) {
             File root = Environment.getExternalStorageDirectory();
             if (root.exists()) {
-                String appPath = root.getAbsolutePath() + File.separator + AppUtils.APP_NAME + File.separator;
+                /*String appPath = root.getAbsolutePath() + File.separator + AppUtils.APP_NAME + File.separator;
                 appFile = new File(appPath);
                 if (!appFile.exists()) {
                     boolean flag = appFile.mkdirs();
-                }
+                }*/
             } else {
                 Log.e(TAG, "getAppTempFile ERROR");
             }

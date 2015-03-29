@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zrm.tumblr.R;
 import com.zrm.tumblr.model.Photo;
 
@@ -19,6 +20,7 @@ public class IndexListViewAdapter extends BaseAdapter {
 
     private Context context;
     private List<Photo> photos;
+    private ImageLoader imageLoader;
 
 
 
@@ -45,22 +47,31 @@ public class IndexListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder mViewHolder = null;
+        Photo photo = photos.get(position);
+
         if(convertView == null){
             mViewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_index,null);
-            mViewHolder.roomNameTextView = (ImageView) convertView.findViewById(R.id.index_item_imageview);
-
+            mViewHolder.imageView = (ImageView) convertView.findViewById(R.id.index_item_imageview);
 
             convertView.setTag(mViewHolder);
         }else{
             mViewHolder = (ViewHolder)convertView.getTag();
         }
+
+        ImageLoader.getInstance().displayImage(photo.getUrl(),mViewHolder.imageView);
+
         return  convertView;
+    }
+
+    public void notifyDataSetChanged(List<Photo> photos){
+        this.photos = photos;
+        this.notifyDataSetChanged();
     }
 
     class ViewHolder {
 
-        public ImageView roomNameTextView;
+        public ImageView imageView;
 
     }
 }

@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class AppEnv {
 
+    public static AppEnv.Env APP_ENV = AppEnv.Env.REA;
 
     public static HashMap<String, String> CHANEL_MAP;
 

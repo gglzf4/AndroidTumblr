@@ -25,7 +25,7 @@ public class AppInfo {
 
         try {
             PackageManager packageManager = context.getPackageManager();
-            pinfo = packageManager.getPackageInfo(AppInfo.class.getPackage().getName(), PackageManager.GET_CONFIGURATIONS);
+            pinfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_CONFIGURATIONS);
             applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -40,8 +40,11 @@ public class AppInfo {
             APP_SECRET = applicationInfo.metaData.getString("APP_SECRET");
             IS_DEV_ENV = applicationInfo.metaData.getBoolean("IS_DEV_ENV", false);
         }
+    }
 
 
+    public static boolean isDevEnv() {
+        return IS_DEV_ENV;
     }
 
 }
