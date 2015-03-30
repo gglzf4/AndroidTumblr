@@ -18,8 +18,7 @@
         android:layout_height="60dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:button="@drawable/trip_radio_button"
-        />
+        android:button="@drawable/trip_radio_button"/>
 
 
 

@@ -26,54 +26,25 @@ import java.io.File;
 public class Application extends android.app.Application {
     public static String TAG = Application.class.getSimpleName();
 
-    public static Context context;
-
-    private static TelephonyManager telephonyManager;
-    private static String baseInfo;
-    private static String deviceInfo;
-
-    public static DisplayMetrics metrics;
-
-
     @Override
     public void onCreate() {
         super.onCreate();
 
         Logger.i(TAG, "----------------Application init start------------------");
-        context = getApplicationContext();
+        Context context = getApplicationContext();
 
         /********读取AndroidManifest.xml自定义内容*******/
+        DeviceInfo.init(context);
         AppInfo.init(context);
 
-        telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
         initImageLoader(context);
-
-
-
-
-
-
-
-
-        initDisplayMetrics();
-
     }
-
-
-
-
 
     @Override
     public void onTerminate() {
         //应用程序退出时会被系统调用
         Logger.i(TAG, "--onTerminate--");
     }
-
-    private void initDisplayMetrics() {
-        metrics = context.getResources().getDisplayMetrics();
-    }
-
 
     public static void initImageLoader(Context context) {
         File cacheDir = StorageUtils.getCacheDirectory(context);
@@ -96,59 +67,8 @@ public class Application extends android.app.Application {
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
                 .writeDebugLogs()
                 .build();
-
         ImageLoader.getInstance().init(config);
-
     }
 
-    public static TelephonyManager getTelephonyManager() {
-        return telephonyManager;
-    }
 
-    public static synchronized String getTelePhoneBaseInfo() {
-        if (baseInfo == null) {
-            baseInfo = Build.MANUFACTURER.replace("-", "_") + "_" +
-                    Build.MODEL.replace("-", "_") + "_" +
-                    Build.PRODUCT.replace("-", "_") + "_" +
-                    Build.DEVICE.replace("-", "_") + "-" +
-                    Build.VERSION.RELEASE + "-" +
-                    telephonyManager.getSimSerialNumber() + "_" +
-                    telephonyManager.getDeviceId() ;
-        }
-        return baseInfo;
-    }
-
-    public static String getLine1Number() {
-        String phoneNumber = telephonyManager.getLine1Number();
-        if (StringUtils.isNotEmpty(phoneNumber) && phoneNumber.length() > 11) {
-            phoneNumber = phoneNumber.substring(phoneNumber.length() - 11, phoneNumber.length());
-        }
-        return phoneNumber == null ? "" : phoneNumber;
-    }
-
-    public static String getDeviceInfo() {
-        if (deviceInfo == null) {
-            try {
-                org.json.JSONObject json = new org.json.JSONObject();
-                String device_id = telephonyManager.getDeviceId();
-                android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                String mac = wifi.getConnectionInfo().getMacAddress();
-                json.put("mac", mac);
-                if (device_id == null || "".equals(device_id)) {
-                    device_id = mac;
-                }
-
-                if (device_id == null || "".equals(device_id)) {
-                    device_id = android.provider.Settings.Secure.getString(context.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-                }
-
-                json.put("device_id", device_id);
-                deviceInfo = json.toString();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return deviceInfo;
-    }
 }
