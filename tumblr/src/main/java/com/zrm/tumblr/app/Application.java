@@ -36,6 +36,7 @@ public class Application extends android.app.Application {
         /********读取AndroidManifest.xml自定义内容*******/
         DeviceInfo.init(context);
         AppInfo.init(context);
+        Session.init(context);
 
         initImageLoader(context);
     }

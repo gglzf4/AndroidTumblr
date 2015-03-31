@@ -32,8 +32,8 @@ public class RestClient {
     }*/
 
     public static void post(String url, Map<String, String> map,AsyncHttpResponseHandler responseHandler) {
-        String baseInfo = createUserBaseInfo();
-        map.put("base_info", baseInfo);
+        /*String baseInfo = createUserBaseInfo();
+        map.put("base_info", baseInfo);*/
         map.put(DataAcquire.APP_KEY, AppInfo.APP_KEY);
         map.put(DataAcquire.SIG, EncryptUtils.getSignature(map,AppInfo.APP_SECRET));
         //map.put("time_token", String.valueOf(System.currentTimeMillis() + DataAcquire.timeGap));

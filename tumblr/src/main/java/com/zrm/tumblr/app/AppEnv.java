@@ -24,7 +24,7 @@ public class AppEnv {
     }
 
     public enum Env {
-        REA("http://123.57.64.122/api/", "Version"),
+        REA("http://115.28.57.215:8080/api/", "Version"),
         PRE("http://localhost:8080/api/", "PreVersion");
 
         public String BASE_URL;

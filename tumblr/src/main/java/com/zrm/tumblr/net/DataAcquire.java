@@ -16,10 +16,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataAcquire {
-    public static final String ACCESS_TOKEN = "access_token";//请求参数
 
-    public static final String APP_KEY = "app_key";//请求参数
+    public static final String ACCESS_TOKEN = "access_token";//请求参数
+    public static final String APP_KEY = "app_key";
     public static final String SIG = "sig";
+    public static final String PID = "pid";
+    public static final String STATUS = "status";
+    public static final String CONTENT = "content";
+    public static final String NAME = "name";
+    public static final String URL = "url";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
+    public static final String MSG = "msg";
+    public static final String ID = "id";
 
 
     /**
@@ -43,6 +52,30 @@ public class DataAcquire {
         try {
             Map<String, String> map = new HashMap<String, String>();
             getNetData("v1/photo/list", map, jsonHttpResponseHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void collectPhoto(Map<String, String> map,JsonHttpResponseHandler jsonHttpResponseHandler) {
+        try {
+            getNetData("v1/collect/photo", map, jsonHttpResponseHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void register(Map<String, String> map,JsonHttpResponseHandler jsonHttpResponseHandler) {
+        try {
+            getNetData("v1/user/register", map, jsonHttpResponseHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void login(Map<String, String> map,JsonHttpResponseHandler jsonHttpResponseHandler) {
+        try {
+            getNetData("v1/user/login", map, jsonHttpResponseHandler);
         } catch (Exception e) {
             e.printStackTrace();
         }

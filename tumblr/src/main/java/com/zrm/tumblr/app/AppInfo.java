@@ -13,6 +13,7 @@ public class AppInfo {
 
 
     //private static SharedPreferences preferences;
+    public static String APP_NAME = "tumblr";
 
     public static int CHANEL_NO;
     public static boolean IS_DEV_ENV;//是否为开发版本
