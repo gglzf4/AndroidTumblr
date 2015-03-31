@@ -161,7 +161,7 @@ public class LoginActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
     }
 
@@ -173,7 +173,7 @@ public class LoginActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_register) {
+        if (id == R.id.action_login) {
             Intent intent = new Intent(this,RegisterActivity.class);
             startActivity(intent);
             this.finish();

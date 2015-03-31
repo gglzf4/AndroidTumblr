@@ -61,7 +61,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
+        if (id == R.id.action_register) {
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
             this.finish();
